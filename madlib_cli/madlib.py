@@ -9,12 +9,21 @@ note: please comment the introduction print to pass the test!
 """
 
 
-print('Welcome To the game of Madlibs Where Your words will turn ,agically into a paragraph. \n how to play: \n 1- you will be asked to enter a words with a specific types \n 2- enjoy')
+# print('Welcome To the game of Madlibs Where Your words will turn ,agically into a paragraph. \n how to play: \n 1- you will be asked to enter a words with a specific types \n 2- enjoy')
 
 def read_template(path):
-    with open(path) as link:
-        content=link.read()
-    return content
+    try:
+        with open(path) as link:
+            content=link.read()
+    except FileNotFoundError:
+        return "file link is not found"
+    else:
+        return content
+    # with open(path) as link:
+    #     content=link.read()
+    # return content
+
+
 
 def parse_template(path):
     text=read_template(path)
