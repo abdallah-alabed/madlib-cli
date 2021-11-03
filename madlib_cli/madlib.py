@@ -12,43 +12,34 @@ note: please comment the introduction print to pass the test!
 # print('Welcome To the game of Madlibs Where Your words will turn ,agically into a paragraph. \n how to play: \n 1- you will be asked to enter a words with a specific types \n 2- enjoy')
 
 def read_template(path):
-    try:
-        with open(path) as link:
-            content=link.read()
-    except FileNotFoundError:
-        return "file link is not found"
-    else:
-        return content
-    # with open(path) as link:
-    #     content=link.read()
-    # return content
+
+    # try:
+    #     file = open(path)
+    # except FileNotFoundError:
+    #     content = "Error : Sorry file not found"
+    # else:
+    #     content = file.read()
+    #     file.close()
+    # finally:
+    #     return content
+
+    file=open(path)
+    return file.read()
 
 
 
-def parse_template(path):
-    text=read_template(path)
-    x=re.findall("{.*?}",text)
-    i=0
-    answers=[]
-    while i < len(x):
-        answer=input("enter  "+x[i]+"  ")
-        answers+=[answer]
-        i+=1
-    return answers,x
+
+
+def parse_template(text):
+    x=re.findall(r'{(.*?)}',text)
+    x= tuple(x)
+    stripped=re.sub(r'{(.*?)}',"{}",text)
+    return stripped ,x
+
     
 
-def merge(path):
-    text=read_template(path)
-    content=text
-    x=re.findall("{.*?}",text)
-    i=0
-    answers=[]
-    while i < len(x):
-        answer=input("enter  "+x[i]+"  ")
-        answers+=[answer]
-        content=content.replace( x[i] , answers[i],1)
-        i+=1
-    print(content)
+def merge(text,x):
+    return text.format(*x)
 
 
 
